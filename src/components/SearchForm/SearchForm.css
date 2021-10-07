@@ -1,0 +1,19 @@
+.Search-form {
+    margin: 50px auto 0 auto;
+    width: 70%;
+}
+
+.Form-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-bottom: 10px;
+}
+
+.categories-select{
+    margin-right: 10px;
+}
+
+label {
+    margin-right: 5px;
+}

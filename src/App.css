@@ -1,10 +1,21 @@
-.App {
-  text-align: center;
+.Container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-image: url('./book.jpg');
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Search-section {
+  margin: 0 auto;
+  text-align: center;
+  
+}
+
+div, p, input, button, form, span, a, ul, li {
+	box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
