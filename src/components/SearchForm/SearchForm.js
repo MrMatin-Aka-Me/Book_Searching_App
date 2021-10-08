@@ -1,11 +1,56 @@
 import React from 'react';
 import './SearchForm.css';
-import { submit, change } from '../../store/actions';
+import { submit, change, changeClass } from '../../store/actions';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+// import {getRequest} from '../../requests';
 
 function SearchForm() {
     const dispatch = useDispatch();
     const queryParameters = useSelector((state) => state.queryParameters, shallowEqual);
+
+    function getRequest(volume, subject, orderBy) {
+        dispatch(changeClass());
+
+        const apiKey = 'AIzaSyCkQZLH6tv0IN-lvMswOyma3yR4UmDMess';
+        let apiUrl = new URL('https://www.googleapis.com/books/v1/volumes');
+        apiUrl.searchParams.set('q', `${volume}subject%3A${subject}`);
+        apiUrl.searchParams.set('orderBy', `${orderBy}`);
+        apiUrl.searchParams.set('maxResults', `30`);
+        apiUrl.searchParams.set('key', `${apiKey}`);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', apiUrl);
+    
+        xhr.onload = evt => {
+            if (xhr.status < 200 || xhr.status > 299) {
+                const error = JSON.parse(xhr.response);
+                console.log(error);
+                return;
+            }
+    
+            const data = JSON.parse(xhr.response);
+            const {totalItems} = data;
+            
+            if (totalItems === 0) {
+                // console.log(data, totalItems);
+                dispatch(submit([], totalItems));
+                return;
+            }
+            const {items} = data;
+            // console.log(data, items, totalItems);
+            dispatch(submit(items, totalItems));
+        };
+        
+        xhr.onerror = evt => {
+            console.log(evt);
+        };
+    
+        xhr.onloadend = evt => {
+            dispatch(changeClass());
+        };
+    
+        xhr.send();
+    };
     
     const handleChange = (evt) => {
         const { name, value } = evt.target;
@@ -15,7 +60,20 @@ function SearchForm() {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        dispatch(submit());
+        
+        const volume = evt.target.elements['volume'].value;
+        const subject = evt.target.elements['subject'].value;
+        const orderBy = evt.target.elements['orderBy'].value;
+        
+        let trimVolume = '';
+        volume.split(' ').forEach((o) => {
+            if (o !== ''){
+              trimVolume += o + ' ';
+            }
+          });
+        // console.log(trimVolume);
+        getRequest(trimVolume, subject, orderBy);
+        // dispatch(submit(items, totalItems));
     };
 
     return (

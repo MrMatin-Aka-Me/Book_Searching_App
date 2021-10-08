@@ -1,4 +1,4 @@
-import { SUBMIT, CHANGE } from '../actions'
+import { SUBMIT, CHANGE, CHANGE_CLASS } from '../actions'
 
 
 export const initialState = {
@@ -11,6 +11,7 @@ export const initialState = {
         subject: 'all',
         orderBy: 'relevance',
     },
+    classNameState: 'DisplayNone',
 };
 
 export const reducer = (state = initialState, action) => {
@@ -19,20 +20,22 @@ export const reducer = (state = initialState, action) => {
             return reduceSubmit(state, action);
         case CHANGE:
             return reduceChange(state, action);
+        case CHANGE_CLASS:
+            return reduceChangeClass(state, action);
         default:
             return state;
     }
 };
 
 const reduceSubmit = (state, action) => {
-    // const {queryResponse, queryParameters} = state;
-    // const {items} = queryResponse
-    // const newBook = {id: `volume: ${queryParameters.volume}, subject: ${queryParameters.subject}, orderBy: ${queryParameters.orderBy}`};
+    const { queryResponse } = state;
+    const { payload: { items, totalItems } } = action;
+    // const newBook = {id: `totalItems: ${totalItems}, items2: ${items}`};
 
-    // return {
-    //     ...state,
-    //     queryResponse: {...queryResponse, items: [...items, {...newBook}]}
-    // }
+    return {
+        ...state,
+        queryResponse: { ...queryResponse, totalItems: totalItems, items: items }
+    }
 };
 
 const reduceChange = (state, action) => {
@@ -42,5 +45,15 @@ const reduceChange = (state, action) => {
     return {
         ...state,
         queryParameters: { ...queryParameters, [name]: value },
+    }
+};
+
+const reduceChangeClass = (state, action) => {
+    const { classNameState } = state;
+    const className = classNameState === 'DisplayNone' ? 'Loader' : 'DisplayNone';
+
+    return {
+        ...state,
+        classNameState: className,
     }
 };
