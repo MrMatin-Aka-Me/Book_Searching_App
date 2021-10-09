@@ -11,7 +11,7 @@ function SearchForm() {
     function getRequest(volume, subject, orderBy) {
         dispatch(changeClass());
 
-        const apiKey = 'AIzaSyCkQZLH6tv0IN-lvMswOyma3yR4UmDMess';
+        const apiKey = '';
         let apiUrl = new URL('https://www.googleapis.com/books/v1/volumes');
         apiUrl.searchParams.set('q', `${volume}subject%3A${subject}`);
         apiUrl.searchParams.set('orderBy', `${orderBy}`);
