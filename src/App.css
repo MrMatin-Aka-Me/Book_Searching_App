@@ -18,6 +18,12 @@ h1, h2, h3, h4, h5, h6 {
   
 }
 
+.ViewMoreDiv{
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 
 
 @media (prefers-reduced-motion: no-preference) {

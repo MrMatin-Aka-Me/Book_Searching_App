@@ -1,6 +1,8 @@
 import './App.css';
 import BookList from './components/BookList/BookList';
 import SearchForm from './components/SearchForm/SearchForm';
+import ViewMore from './components/ViewMore/ViewMore';
+
 
 function App() {
   return (
@@ -12,6 +14,7 @@ function App() {
         </div>
       </div>
       <BookList/>
+      <div className="ViewMoreDiv"><ViewMore/></div>
     </>
   );
 }

@@ -1,3 +1,7 @@
+div, p, input, button, form, span, a, ul, li {
+	box-sizing: border-box;
+}
+
 .Wrapper2 {
     text-align: center;
     margin-bottom: 15px;
@@ -10,7 +14,7 @@
 .BookList {
     display: grid;
     /* grid-template-rows: 1fr 1fr 1fr 1fr 1fr; */
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 2vw;
 }
 

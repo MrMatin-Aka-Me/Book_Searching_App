@@ -1,3 +1,11 @@
 /* .BookCard {
     background: #575656;
 } */
+div, p, input, button, form, span, a, ul, li {
+	box-sizing: border-box;
+}
+
+.BookImg{
+    width: 130px;
+    height: 200px;
+}

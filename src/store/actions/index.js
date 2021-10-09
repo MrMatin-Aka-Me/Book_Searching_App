@@ -1,6 +1,7 @@
 export const SUBMIT = 'SUBMIT';
 export const CHANGE = 'CHANGE';
 export const CHANGE_CLASS = 'CHANGE_CLASS';
+// export const VIEW_MORE = 'VIEW_MORE';
 
 export const submit = (items, totalItems) => {
     return {
@@ -22,3 +23,10 @@ export const changeClass = () => {
         payload: {},
     };
 };
+
+// export const viewMore = (nextItems, totalItems) => {
+//     return {
+//         type: VIEW_MORE,
+//         payload: {nextItems, totalItems},
+//     };
+// };

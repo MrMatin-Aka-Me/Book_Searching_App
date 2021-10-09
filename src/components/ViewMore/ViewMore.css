@@ -1,0 +1,10 @@
+div, p, input, button, form, span, a, ul, li {
+	box-sizing: border-box;
+}
+
+.btnDisplayNone {
+    display: none;
+}
+.btnDisplayBlock {
+    display: inline;
+}

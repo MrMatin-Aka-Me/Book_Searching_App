@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React from 'react';
+import book_icon from './book_icon.png';
 // {
 //     "kind": "books#volume",
 //     "id": "zyTCAlFPjgYC",
@@ -86,17 +86,21 @@ import React from 'react'
 // {imageLinks, categories, title, authors}
 function BookCard({ book }) {
     const { volumeInfo } = book;
-    const thumbnail = volumeInfo.imageLinks?.thumbnail;
+
+    const smallThumbnail = volumeInfo.imageLinks?.smallThumbnail;
+
     const categories = volumeInfo.categories !== undefined ? volumeInfo.categories : '';
     const firstCategory = categories !== '' ? categories[0] : '';
+
     const title = volumeInfo.title;
+
     const authors = volumeInfo.authors !== undefined ? volumeInfo.authors : '';
     const authorsToString = authors !== '' ? authors.join(' ') : '';
 
     return (
         <div className="BookCard card">
-            <img src={thumbnail} className="BookImg card-img-top" alt={title} />
-            <div className="card-body">
+            <img src={smallThumbnail || book_icon} className="BookImg" alt={title} />
+            <div className="">
                 <p className="FirstCategory card-text">{firstCategory || ''}</p>
                 <h6 className="card-title">{title}</h6>
                 <p className="Authors card-text">{authorsToString}</p>
