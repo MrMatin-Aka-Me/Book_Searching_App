@@ -33,7 +33,7 @@ function ViewMore() {
     function getMoreRequest(volume, subject, orderBy, startIndex) {
         dispatch(changeClass());
         
-        const apiKey = '';
+        const apiKey = 'AIzaSyCkQZLH6tv0IN-lvMswOyma3yR4UmDMess';
         
         let apiUrl = new URL('https://www.googleapis.com/books/v1/volumes');
         const qParam = subject === 'all' ? volume : `${volume}+subject:${subject}`;
