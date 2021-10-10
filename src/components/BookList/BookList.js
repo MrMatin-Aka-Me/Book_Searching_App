@@ -8,7 +8,7 @@ function BookList() {
     const classNameState = useSelector((state) => state.classNameState, shallowEqual);
     const { items } = queryResponse;
     const { totalItems } = queryResponse;
-    console.log(items);
+    // console.log(items);
     return (
         <div className="Wrapper">
             <div className="Wrapper2">
@@ -20,7 +20,7 @@ function BookList() {
                 </div>
             </div>
             <div className="BookList">
-                {items.map(o => <BookCard key={o.id + Math.random()} book={o} />)}
+                {items.map((o, index) => <BookCard key={o.id + Math.random()} book={o} serialNumber={index}/>)}
             </div>
         </div>
     )

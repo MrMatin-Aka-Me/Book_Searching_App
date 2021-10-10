@@ -1,0 +1,20 @@
+.BookInfo {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 15px;
+    grid-gap: 2vw;
+    background: #fffcfc;
+}
+.BackBtn {
+    padding: 15px;
+    background: #fffcfc;
+}
+
+ 
+.BookInfo > div {
+    text-align: center;
+}
+
+.BookInfo > div.Description {
+    border: 1px solid grey;
+}

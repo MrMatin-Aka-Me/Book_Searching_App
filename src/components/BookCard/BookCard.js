@@ -1,5 +1,50 @@
 import React from 'react';
 import book_icon from './book_icon.png';
+import { changeBookFullInfo } from '../../store/actions';
+import { useDispatch } from 'react-redux';
+import './BookCard.css';
+
+function BookCard({ book, serialNumber }) {
+    const dispatch = useDispatch();
+
+
+    const { volumeInfo } = book;
+
+    const smallThumbnail = volumeInfo.imageLinks?.smallThumbnail;
+    const img = smallThumbnail || book_icon;
+
+    const categories = volumeInfo.categories !== undefined ? volumeInfo.categories : [];
+    const firstCategory = categories !== [] ? categories[0] : '';
+
+    const title = volumeInfo.title;
+
+    const authors = volumeInfo.authors !== undefined ? volumeInfo.authors : [];
+    const authorsToString = authors !== [] ? authors.join(', ') : '';
+
+    const description = volumeInfo.description !== undefined ? volumeInfo.description : '';
+
+    const handleCardOnClick = () => {
+        const opened = true;
+        dispatch(changeBookFullInfo(img, categories, title, authors, description, opened));
+        
+    };
+
+    return (
+        <div className="BookCard card" onClick={handleCardOnClick}>
+            <div className="BookImgDiv"><img src={img} className="BookCardImg" alt={title} /></div>
+            <div className="card-body">
+                <p className="FirstCategory card-text">{firstCategory || ''}</p>
+                <h6 className="card-title">{title}</h6>
+                <p className="Authors card-text">{authorsToString}</p>
+            </div>
+            <span>{'#' + (serialNumber + 1)}</span>
+        </div>
+    )
+}
+
+export default BookCard
+
+/* book object that returns API: */ 
 // {
 //     "kind": "books#volume",
 //     "id": "zyTCAlFPjgYC",
@@ -84,29 +129,3 @@ import book_icon from './book_icon.png';
 //     }
 //    }
 // {imageLinks, categories, title, authors}
-function BookCard({ book }) {
-    const { volumeInfo } = book;
-
-    const smallThumbnail = volumeInfo.imageLinks?.smallThumbnail;
-
-    const categories = volumeInfo.categories !== undefined ? volumeInfo.categories : '';
-    const firstCategory = categories !== '' ? categories[0] : '';
-
-    const title = volumeInfo.title;
-
-    const authors = volumeInfo.authors !== undefined ? volumeInfo.authors : '';
-    const authorsToString = authors !== '' ? authors.join(' ') : '';
-
-    return (
-        <div className="BookCard card">
-            <img src={smallThumbnail || book_icon} className="BookImg" alt={title} />
-            <div className="">
-                <p className="FirstCategory card-text">{firstCategory || ''}</p>
-                <h6 className="card-title">{title}</h6>
-                <p className="Authors card-text">{authorsToString}</p>
-            </div>
-        </div>
-    )
-}
-
-export default BookCard

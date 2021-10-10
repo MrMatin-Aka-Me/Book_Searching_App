@@ -1,11 +1,18 @@
-/* .BookCard {
-    background: #575656;
-} */
 div, p, input, button, form, span, a, ul, li {
 	box-sizing: border-box;
 }
 
-.BookImg{
+.BookCardImg{
     width: 130px;
     height: 200px;
+}
+
+.BookImgDiv {
+    text-align: center;
+}
+
+.BookCard:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    box-shadow: 0px 0px 10px #888888;
 }

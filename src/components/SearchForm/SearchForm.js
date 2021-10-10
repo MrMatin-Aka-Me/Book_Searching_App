@@ -1,8 +1,8 @@
 import React from 'react';
 import './SearchForm.css';
-import { submit, change, changeClass } from '../../store/actions';
+import { submit, change, changeClass, resetBookFullInfo } from '../../store/actions';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-// import {getRequest} from '../../requests';
+
 
 function SearchForm() {
     const dispatch = useDispatch();
@@ -11,12 +11,15 @@ function SearchForm() {
     function getRequest(volume, subject, orderBy) {
         dispatch(changeClass());
 
-        const apiKey = '';
+        const apiKey = 'AIzaSyCkQZLH6tv0IN-lvMswOyma3yR4UmDMess';
+
         let apiUrl = new URL('https://www.googleapis.com/books/v1/volumes');
-        apiUrl.searchParams.set('q', `${volume}subject%3A${subject}`);
+        const qParam = subject === 'all' ? volume : `${volume}+subject:${subject}`;
+        apiUrl.searchParams.set('q', qParam);
         apiUrl.searchParams.set('orderBy', `${orderBy}`);
         apiUrl.searchParams.set('maxResults', `30`);
         apiUrl.searchParams.set('key', `${apiKey}`);
+        console.log(apiUrl);
 
         const xhr = new XMLHttpRequest();
         xhr.open('GET', apiUrl);
@@ -32,12 +35,10 @@ function SearchForm() {
             const {totalItems} = data;
             
             if (totalItems === 0) {
-                // console.log(data, totalItems);
                 dispatch(submit([], totalItems));
                 return;
             }
             const {items} = data;
-            // console.log(data, items, totalItems);
             dispatch(submit(items, totalItems));
         };
         
@@ -54,13 +55,12 @@ function SearchForm() {
     
     const handleChange = (evt) => {
         const { name, value } = evt.target;
-        // console.log(name, value)
         dispatch(change(name, value));
     };
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        
+        dispatch(resetBookFullInfo());
         const volume = evt.target.elements['volume'].value;
         const subject = evt.target.elements['subject'].value;
         const orderBy = evt.target.elements['orderBy'].value;
@@ -71,9 +71,9 @@ function SearchForm() {
               trimVolume += o + ' ';
             }
           });
-        // console.log(trimVolume);
-        getRequest(trimVolume, subject, orderBy);
-        // dispatch(submit(items, totalItems));
+        
+        const trimVolume2 = trimVolume.substring(0, trimVolume.length - 1); 
+        getRequest(trimVolume2, subject, orderBy);
     };
 
     return (

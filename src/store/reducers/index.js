@@ -1,5 +1,13 @@
-import { SUBMIT, CHANGE, CHANGE_CLASS /*VIEW_MORE*/ } from '../actions'
+import { SUBMIT, CHANGE, CHANGE_CLASS, CHANGE_BOOK_FULL_INFO, RESET_BOOK_FULL_INFO } from '../actions'
 
+const empty = {
+    img: '',
+    categories: [],
+    title: '',
+    authors: [],
+    description: '',
+    opened: false,
+};
 
 export const initialState = {
     queryResponse: {
@@ -12,6 +20,7 @@ export const initialState = {
         orderBy: 'relevance',
     },
     classNameState: 'DisplayNone',
+    bookFullInfo: empty,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -22,8 +31,10 @@ export const reducer = (state = initialState, action) => {
             return reduceChange(state, action);
         case CHANGE_CLASS:
             return reduceChangeClass(state, action);
-        // case VIEW_MORE:
-        //     return reduceViewMore(state, action);
+        case CHANGE_BOOK_FULL_INFO:
+            return reduceBookFullInfo(state, action);
+        case RESET_BOOK_FULL_INFO:
+            return reduceResetBookFullInfo(state, action);
         default:
             return state;
     }
@@ -32,8 +43,6 @@ export const reducer = (state = initialState, action) => {
 const reduceSubmit = (state, action) => {
     const { queryResponse } = state;
     const { payload: { items, totalItems } } = action;
-    console.log('submit items length: ', queryResponse.items.length);
-    
 
     return {
         ...state,
@@ -61,25 +70,20 @@ const reduceChangeClass = (state, action) => {
     }
 };
 
-// const reduceViewMore = (state, action) => {
-//     const { queryResponse } = state;
-//     let {items} = queryResponse;
-//     const { payload: { nextItems, totalItems } } = action;
-//     console.log('reduceViewMore');
-//     // if (items[items.length - 1] === nextItems[0]) {
-//     //     items.pop([items.length - 1]);
-//     // }
-//     // console.log(items);
-//     // console.log(nextItems);
-//     if (totalItems !== 0){
-//         for (const iterator of nextItems) {
-//             items.push(iterator);
-//         }
-//     } else {items = []};
+const reduceBookFullInfo = (state, action) => {
+    const { bookFullInfo } = state;
+    const { payload: { img, categories, title, authors, description, opened } } = action;
+    console.log(img, categories, title, authors, description, opened);
+    return {
+        ...state,
+        bookFullInfo: { ...bookFullInfo, img, categories, title, authors, description, opened },
+    }
+};
 
-//     // console.log(items);
-//     return {
-//         ...state,
-//         queryResponse: { ...queryResponse, totalItems: totalItems, items: items}
-//     }
-// };
+const reduceResetBookFullInfo = (state, action) => {
+
+    return {
+        ...state,
+        bookFullInfo: empty,
+    }
+};
