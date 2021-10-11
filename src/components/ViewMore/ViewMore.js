@@ -37,12 +37,12 @@ function ViewMore() {
         
         let apiUrl = new URL('https://www.googleapis.com/books/v1/volumes');
         const qParam = subject === 'all' ? volume : `${volume}+subject:${subject}`;
-        apiUrl.searchParams.set('q', qParam);
+        apiUrl.searchParams.set('q', `${qParam}`);
         apiUrl.searchParams.set('orderBy', `${orderBy}`);
         apiUrl.searchParams.set('startIndex', `${startIndex}`);
         apiUrl.searchParams.set('maxResults', `30`);
         apiUrl.searchParams.set('key', `${apiKey}`);
-
+        console.log(apiUrl);
 
         const xhr = new XMLHttpRequest();
         xhr.open('GET', apiUrl);
@@ -63,6 +63,7 @@ function ViewMore() {
                 return;
             }
 
+            console.log(data);
             const nextItems = data.items;
             for (const iterator of nextItems) {
                 items.push(iterator);
