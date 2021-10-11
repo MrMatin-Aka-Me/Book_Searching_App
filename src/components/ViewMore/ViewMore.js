@@ -17,7 +17,7 @@ function ViewMore() {
     for (const iterator of queryResponse.items) {
         items.push(iterator);
     }
-
+    console.log(items);
     const startIndex = items.length;
 
     let viewBtnClassName = (totalItems === 0 || items.length >= totalItems) ? 'btnDisplayNone' : 'btnDisplayBlock';
