@@ -36,3 +36,30 @@ div, p, input, button, form, span, a, ul, li {
     border-radius: 10%;
     padding: 0 3px;
 }
+
+@media screen and (max-width: 992px) { 
+    .BookList {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+ }
+
+ @media screen and (max-width: 697px) { 
+    .BookList {
+        grid-template-columns: 1fr 1fr;
+    }
+ }
+
+ @media screen and (max-width: 480px) { 
+    .BookList {
+        grid-template-columns: 1fr;
+    }
+ }
+
+ @media screen and (max-width: 320px) { 
+    
+ }
+
+
+
+
+

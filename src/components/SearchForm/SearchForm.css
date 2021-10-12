@@ -4,12 +4,13 @@ div, p, input, button, form, span, a, ul, li {
 
 .Search-form {
     margin: 50px auto 0 auto;
-    width: 70%;
+    width: 50%;
 }
 
 .Form-row {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
+    justify-content: space-around;
     flex-wrap: nowrap;
     margin-bottom: 10px;
 }
@@ -20,4 +21,33 @@ div, p, input, button, form, span, a, ul, li {
 
 label {
     margin-right: 5px;
+}
+
+.SelectorsWrapper {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 1000px) { 
+    .Search-form {
+        width: 55%;
+    }
+}
+
+@media screen and (max-width: 800px) { 
+    .Search-form {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 576px) { 
+    .Search-form {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 670px) { 
+    .Selects {
+        flex-direction: column;
+    }   
 }
